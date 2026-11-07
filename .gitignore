@@ -1,0 +1,109 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Widget Preview related
+.widget_preview/
+
+/android/app/.cxx/
+
+# auto generated
+*.g.dart
+*.freezed.dart
+*.tailor.dart
+*.vec
+
+# translations
+lib/translations/generated/
+
+/ios/Podfile.lock
+
+devtools_options.yaml
+
+# ─── Private: never commit (repo goes public later; history is kept) ───────
+# AI rules, context and agent folders
+/docs/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+.claude/
+.agents/
+.cursor/
+.cursorrules
+.windsurf/
+.windsurfrules
+.aider*
+.github/copilot-instructions.md
+
+# Secrets (SmartSpectra key lives in /secrets.json — NOT in config/, which is bundled as an app asset)
+/secrets.json
+.env
+.env.*
+*.jks
+*.keystore
+key.properties
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+
+# Fastlane / release setup — private: Firebase app IDs, tester groups, store
+# config and credentials. Keep a private backup; a public clone builds without it.
+android/fastlane/
+ios/fastlane/
+android/Gemfile
+android/Gemfile.lock
+ios/Gemfile
+ios/Gemfile.lock
+
+# Firebase config (regenerate with `flutterfire configure`)
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+lib/firebase_options*.dart
+firebase.json
+.firebaserc
+
+# Local Android SDK path
+android/local.properties

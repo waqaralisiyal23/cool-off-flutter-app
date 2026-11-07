@@ -1,0 +1,59 @@
+screenshot: flutter screenshot -o ~/Downloads/flutter.png
+
+# Code generation.
+# NOTE: `--delete-conflicting-outputs` was REMOVED from build_runner and no
+# longer exists. Do not reintroduce it — it fails with an unknown-flag error.
+gen: dart run build_runner build
+
+# The gate: analyzer issues.
+check: flutter analyze
+
+# Format in place.
+format: dart format lib test
+
+# Strict gate for CI: fails on unformatted code OR analyzer issues.
+# NOTE: derry does NOT propagate a failing step inside a list, so anything that
+# must fail the whole script has to be a single `&&`-chained command string.
+check-strict: dart format --output=none --set-exit-if-changed lib test && flutter analyze
+
+# Nested scripts are invoked with a SPACE, not a colon: `derry generate-code svg`.
+generate-code:
+  build: dart run build_runner build
+  watch: dart run build_runner watch
+  rebuild: dart run build_runner build
+  delete: find . -maxdepth 20 -type f \( -name "*.inject.summary" -o -name "*.inject.dart" -o  -name "*.g.dart" -o -name "*.freezed.dart" \) -delete
+  # --no-optimize-overdraw: the optimizer merges overlapping shapes, which
+  # fills in hollow ones (an icon's outline under a badge, say).
+  svg: dart run vector_graphics_compiler --input-dir assets/vectors --no-optimize-overdraw
+  translations: flutter gen-l10n
+
+git:
+  delete:
+    (execution): once
+    (scripts):
+      - read -p 'Are you sure you want to delete all ignored directories and files? y/n:' yn
+      - '[[ $yn == "y" ]] && git clean -dfX'
+
+compile:
+  - flutter clean
+  - $generate-code:delete
+  - $generate-code:rebuild
+  - $generate-code:translations
+  - flutter pub get
+
+build:
+  android: |
+    export FASTLANE_SKIP_UPDATE_CHECK=1 &&
+    read -p 'Enter Environment (production/qa):' dartEnv &&
+    cd android &&
+    bundle update fastlane &&
+    bundle install &&
+    bundle exec fastlane build dartEnv:$dartEnv &&
+    bundle exec fastlane deploy dartEnv:$dartEnv
+  ios: |
+    read -p 'Enter Environment (production/qa):' dartEnv &&
+    cd ios &&
+    bundle update fastlane &&
+    bundle install &&
+    bundle exec fastlane build dartEnv:$dartEnv &&
+    bundle exec fastlane deploy dartEnv:$dartEnv

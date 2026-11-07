@@ -1,0 +1,3 @@
+#include "Generated.xcconfig"
+#include "GeneratedEnvironment.xcconfig"
+#include "Platform.xcconfig"

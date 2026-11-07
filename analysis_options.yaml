@@ -1,0 +1,35 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    # Build output, not source. SwiftPM checks third-party Dart packages out
+    # into build/ios/SourcePackages, which the analyzer would otherwise walk.
+    - "build/**"
+    - android/**
+    - ios/**
+
+linter:
+  rules:
+    constant_identifier_names: false
+    sort_pub_dependencies: false
+    prefer_relative_imports: true
+    unawaited_futures: true
+    null_check_on_nullable_type_parameter: false
+    avoid_positional_boolean_parameters: false
+    avoid_classes_with_only_static_members: false
+    use_key_in_widget_constructors: false
+    avoid_renaming_method_parameters: false
+    require_trailing_commas: true
+    avoid_void_async: true
+    library_private_types_in_public_api: false
+    avoid_redundant_argument_values: true
+    prefer_const_constructors: true
+    prefer_const_declarations: true
+
+public_internal:
+  severity: warning
+  exclude:
+    # Every generator here emits a `*.g.dart` suffix: built_value `.g.dart`,
+    # @BlocGen `.bloc.g.dart`, @EnumGen `.enum.g.dart`, @AssetGen `.asset.g.dart`.
+    # The old `.ag/.bg/.eg.dart` patterns matched nothing.
+    - "**/*.g.dart"

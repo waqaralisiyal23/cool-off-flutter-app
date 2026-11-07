@@ -1,0 +1,27 @@
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+.cxx/
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
+key.properties
+**/*.keystore
+**/*.jks
+
+/.idea
+settings_aar.gradle
+
+#Fastlane
+fastlane/README.md
+fastlane/report.xml
+fastlane/play-store-credentials.json
+fastlane/firebase-credentials.json
+Gemfile.lock
+
+#Firebase
+app/google-services.json

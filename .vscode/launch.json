@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "main-production",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define",
+                "DART_ENV=production",
+                "--dart-define-from-file=secrets.json"
+            ]
+        },
+        {
+            "name": "main-qa",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define",
+                "DART_ENV=qa",
+                "--dart-define-from-file=secrets.json"
+            ]
+        }
+    ]
+}
