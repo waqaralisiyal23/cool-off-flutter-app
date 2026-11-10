@@ -14,11 +14,21 @@ class EnvModeBanner extends StatelessWidget {
     if (dartEnv == Environment.production) {
       return child;
     }
-    return Banner(
+    final banner = Banner(
       message: dartEnv.name,
       textDirection: TextDirection.ltr,
       location: BannerLocation.topEnd,
       child: child,
+    );
+    if (!simulateMeasurement) {
+      return banner;
+    }
+    // Readings are made up: never let a screenshot pass for a real one.
+    return Banner(
+      message: 'SIMULATED',
+      textDirection: TextDirection.ltr,
+      location: BannerLocation.bottomStart,
+      child: banner,
     );
   }
 }

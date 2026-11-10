@@ -1,14 +1,24 @@
-/// Lazy holder for global blocs, provided at the root in `main.dart`.
-///
-/// Planned (docs/05-architecture.md): `AppPreferencesBloc` (hydrated: device
-/// id, onboarding, analytics and crash-report toggles), `SettingsBloc` and
-/// `BaselineBloc`. Add each as a lazily created getter:
-///
-/// ```dart
-/// AppPreferencesBloc? _appPreferencesBloc;
-/// AppPreferencesBloc get appPreferencesBloc =>
-///     _appPreferencesBloc ??= AppPreferencesBloc();
-/// ```
-class _SingletonBloc {}
+import 'app_preferences_bloc.dart';
+import 'baseline_bloc.dart';
+import 'notification_access_bloc.dart';
+import 'settings_bloc.dart';
+
+/// Lazy holder for the global blocs, provided at the root in `main.dart`.
+class _SingletonBloc {
+  AppPreferencesBloc? _appPreferencesBloc;
+  SettingsBloc? _settingsBloc;
+  BaselineBloc? _baselineBloc;
+  NotificationAccessBloc? _notificationAccessBloc;
+
+  AppPreferencesBloc get appPreferencesBloc =>
+      _appPreferencesBloc ??= AppPreferencesBloc();
+
+  SettingsBloc get settingsBloc => _settingsBloc ??= SettingsBloc();
+
+  BaselineBloc get baselineBloc => _baselineBloc ??= BaselineBloc();
+
+  NotificationAccessBloc get notificationAccessBloc =>
+      _notificationAccessBloc ??= NotificationAccessBloc();
+}
 
 final singletonBloc = _SingletonBloc();

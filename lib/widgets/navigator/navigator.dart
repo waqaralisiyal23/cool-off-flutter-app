@@ -57,6 +57,9 @@ abstract class NavigatorProvider {
 
   const NavigatorProvider({required this._navigatorKey});
 
+  /// For code outside the navigator's subtree, such as a notification tap.
+  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
+
   static NavigatorState of<NP extends NavigatorProvider>(
     BuildContext context,
   ) => Provider.of<NP>(context)._navigatorKey.currentState!;

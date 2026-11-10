@@ -116,6 +116,15 @@
         "revision" : "f4a19a3c313dc2616c70bb49d29a799fb16be837",
         "version" : "2.4.1"
       }
+    },
+    {
+      "identity" : "smartspectra-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Presage-Security/SmartSpectra-Swift.git",
+      "state" : {
+        "revision" : "9d98140d4fe7d075bb0d671abe9daed4cb3d8c1b",
+        "version" : "3.4.0"
+      }
     }
   ],
   "version" : 2

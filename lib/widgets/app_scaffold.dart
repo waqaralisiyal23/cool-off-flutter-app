@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../core/app_theme.dart';
+
 class AppScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
@@ -37,13 +39,13 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Dark status bar icons unless something on the page says otherwise.
+    // Light status bar icons on the dark theme unless the page says otherwise.
     //
     // A screen without an app bar would otherwise set no style at all and keep
     // whatever the previous screen left behind. An app bar declares its own
     // style, and being deeper in the tree it wins over this default.
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
+      value: AppTheme.systemUi,
       child: Scaffold(
         appBar: appBar,
         body: body,

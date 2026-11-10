@@ -60,12 +60,17 @@ if (envPropertiesFile.exists()) {
 
 android {
     namespace = "com.codysseylabs.cooloff"
-    compileSdk = flutter.compileSdkVersion
+    // SmartSpectra needs 36; flutter_local_notifications 23 and
+    // androidx.core 1.19 need 37 (docs/05-architecture.md).
+    compileSdk = maxOf(37, flutter.compileSdkVersion)
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // flutter_local_notifications uses java.time APIs, which need
+        // desugaring on older Android versions.
+        isCoreLibraryDesugaringEnabled = true
     }
 
     // AGP 9 turns resValue off by default; app_name below needs it.
@@ -75,7 +80,8 @@ android {
 
     defaultConfig {
         applicationId = "com.codysseylabs.cooloff"
-        minSdk = flutter.minSdkVersion
+        // SmartSpectra SDK requirement.
+        minSdk = 28
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -116,4 +122,8 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
