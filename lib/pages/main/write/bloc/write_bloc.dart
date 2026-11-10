@@ -82,7 +82,14 @@ class WriteBloc extends BVCubit<WriteState, WriteStateBuilder>
       );
   }
 
+  /// Bumped by every refresh. A refresh that waited on the database while a
+  /// newer one started is stale and must not overwrite it (on launch the
+  /// sends can arrive before the answers, which would show answered
+  /// check-ins again).
+  int _generation = 0;
+
   Future<void> _refresh() async {
+    final generation = ++_generation;
     final settings = _settings;
     if (settings == null || !settings.checkinEnabled) {
       emit(state.rebuild((b) => b.checkins.clear()));
@@ -106,6 +113,9 @@ class WriteBloc extends BVCubit<WriteState, WriteStateBuilder>
       final message = messageId == null
           ? null
           : await recordsService.getMessage(messageId);
+      if (generation != _generation) {
+        return;
+      }
       due.add(
         PendingCheckin(
           checkId: send.id,
@@ -115,7 +125,9 @@ class WriteBloc extends BVCubit<WriteState, WriteStateBuilder>
         ),
       );
     }
-    emit(state.rebuild((b) => b.checkins.replace(due)));
+    if (generation == _generation) {
+      emit(state.rebuild((b) => b.checkins.replace(due)));
+    }
   }
 
   /// Saves the answer (which also re-tunes the Heated cutoff) and cancels

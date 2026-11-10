@@ -1,0 +1,5 @@
+{
+  // Flutter touches pubspec.yaml attributes on every iOS build; an automatic
+  // pub get then resets the iOS SPM target to 15.0 and the build fails.
+  "dart.runPubGetOnPubspecChanges": "never"
+}

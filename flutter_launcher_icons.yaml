@@ -1,0 +1,14 @@
+# App icon sources are rendered from code: `flutter test tool/icon/render_icon_test.dart`
+# (tool/icon/cool_off_icon.dart). Then regenerate every size with:
+#   dart pub global activate flutter_launcher_icons   # once
+#   flutter_launcher_icons
+# (Run as a global tool so it never changes the app's own dependencies.)
+flutter_launcher_icons:
+  image_path: assets/icon/icon.png
+  android: true
+  min_sdk_android: 28
+  adaptive_icon_background: assets/icon/icon_background.png
+  adaptive_icon_foreground: assets/icon/icon_foreground.png
+  adaptive_icon_monochrome: assets/icon/icon_monochrome.png
+  ios: true
+  remove_alpha_ios: true

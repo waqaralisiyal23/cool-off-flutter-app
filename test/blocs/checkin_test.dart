@@ -114,6 +114,36 @@ void main() {
       },
     );
 
+    test(
+      'answered check-ins stay hidden when the app opens (no stale refresh)',
+      () async {
+        // As on launch: three heated sends, two already answered.
+        final answered1 = await _heatedSend(recipient: 'Team');
+        final answered2 = await _heatedSend();
+        await _heatedSend();
+        await recordsService.saveReflection(
+          checkRecordId: answered1,
+          answer: ReflectionAnswer.regret,
+        );
+        await recordsService.saveReflection(
+          checkRecordId: answered2,
+          answer: ReflectionAnswer.regret,
+        );
+
+        final settings = testSettings(keepMessageText: true);
+        final bloc = WriteBloc(
+          settings: Stream.value(settings),
+          initialSettings: settings,
+          demoCheckinsNow: Stream.value(true),
+          initialDemo: true,
+        );
+        await _settle();
+        await _settle();
+        expect(bloc.state.checkins, hasLength(1));
+        await bloc.close();
+      },
+    );
+
     test('a send from a minute ago is not due yet outside demo mode', () async {
       await _heatedSend();
       final settings = testSettings();

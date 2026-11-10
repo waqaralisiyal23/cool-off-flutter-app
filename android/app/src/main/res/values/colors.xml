@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AppColors.background: the window and launch screen match the app,
+         so there is no white flash before the first frame. -->
+    <color name="splash_background">#0A1020</color>
+</resources>
