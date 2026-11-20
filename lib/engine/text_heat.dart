@@ -147,6 +147,32 @@ class TextHeat {
     RegExp(r'\bscrew you\b'),
     RegExp(r'\bgo to hell\b'),
     RegExp(r'\bf[*#@]+k'),
+    // Dismissing someone.
+    RegExp(r'\bget out of (?:here|my)\b'),
+    RegExp(r'\bget lost\b'),
+    RegExp(r'\bleave me alone\b'),
+    RegExp(r'\bmind your own business\b'),
+    RegExp(r'\bdon.?t (?:ever )?(?:talk|speak|text|call) (?:to )?me\b'),
+    RegExp(r'\bnever (?:come back|talk to me|contact me)\b'),
+    // Questioning someone's sense.
+    RegExp(r'\bin your (?:right )?senses\b'),
+    RegExp(r'\bout of your mind\b'),
+    RegExp(r'\blost your mind\b'),
+    RegExp(r'\bare you (?:crazy|mad|insane|blind|deaf)\b'),
+    RegExp(r'\bwhat.?s wrong with you\b'),
+    RegExp(r'\bwhat is wrong with you\b'),
+    RegExp(r'\bwho do you think you are\b'),
+    // "You are messy", "you're such a mess": a word that is only an insult
+    // when it describes the person.
+    RegExp(
+      r"\byou(?:'re| are| r)\s+(?:(?:so|such|really|being|always|just|a|an"
+      r'|totally|completely)\s+)*(?:messy|a mess|rude|crazy|mad|insane'
+      r'|annoying|careless|hopeless|irresponsible|terrible|awful|horrible'
+      r'|mean|toxic|impossible|unprofessional|childish|immature|fake|ugly'
+      r'|arrogant|shameless|nuts|psycho|disrespectful|unbearable|evil'
+      r'|ignorant|senseless|brainless|spineless|heartless|cheap|a disgrace'
+      r'|a failure|a waste)\b',
+    ),
   ];
 
   static final List<RegExp> _absolutes = [

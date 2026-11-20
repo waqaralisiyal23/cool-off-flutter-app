@@ -84,6 +84,40 @@ void main() {
       );
     });
 
+    test('dismissive phrases and "you are <insult>" count', () {
+      for (final text in [
+        'Are you in your senses?',
+        'Just get out of here',
+        'you are messy',
+        "You're such a mess",
+        'Get lost',
+        "What's wrong with you",
+      ]) {
+        expect(
+          TextHeat.analyze(text).signals,
+          contains(TextHeatSignal.harshWords),
+          reason: text,
+        );
+      }
+      expect(
+        TextHeat.analyze(
+          'Are you in your senses? Just get out of here, you are messy',
+        ).points,
+        2,
+      );
+    });
+
+    test('the same words describing things, not people, stay calm', () {
+      for (final text in [
+        'The kitchen is messy, can you help me tidy it?',
+        'Can we get out of the meeting early?',
+        'Are you coming to dinner tonight?',
+        'You are a star, thank you!',
+      ]) {
+        expect(TextHeat.analyze(text).points, 0, reason: text);
+      }
+    });
+
     test('two harsh words are a lot of heat', () {
       expect(TextHeat.analyze('You are a useless idiot').points, 2);
     });
