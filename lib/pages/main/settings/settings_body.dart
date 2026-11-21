@@ -407,6 +407,20 @@ class _DemoSection extends StatelessWidget {
             onChanged: preferences.updateDemoCheckinsNow,
           ),
         ),
+        ListTile(
+          leading: const Icon(Icons.history_rounded),
+          title: const Text(
+            'Fill with sample history',
+            style: AppTypography.medium16,
+          ),
+          subtitle: const Text(
+            'Adds two weeks of checks, cool-downs and check-in answers (no '
+            'message text) so Insights has something to show. Delete all my '
+            'data removes it.',
+            style: AppTypography.regular12,
+          ),
+          onTap: () => _confirmFill(context),
+        ),
         if (simulateMeasurement)
           AppPreferencesBlocSelector.simulateHeated(
             builder: (heated) => SwitchListTile(
@@ -426,6 +440,36 @@ class _DemoSection extends StatelessWidget {
           ),
       ],
     );
+  }
+}
+
+Future<void> _confirmFill(BuildContext context) async {
+  final bloc = SettingsPageBloc.of(context);
+  final messenger = ScaffoldMessenger.of(context);
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (dialogContext) => AlertDialog(
+      title: const Text('Add sample history?'),
+      content: const Text(
+        'Adds about 20 past checks over the last two weeks. Running it twice '
+        'adds them twice.',
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => dialogContext.pop(false),
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () => dialogContext.pop(true),
+          child: const Text('Add'),
+        ),
+      ],
+    ),
+  );
+  if (confirmed ?? false) {
+    AppHaptics.tap();
+    final note = await bloc.fillSampleHistory();
+    messenger.showSnackBar(SnackBar(content: Text(note)));
   }
 }
 

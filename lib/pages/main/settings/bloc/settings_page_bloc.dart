@@ -10,6 +10,7 @@ import '../../../../bloc/settings_bloc.dart';
 import '../../../../database/app_database.dart';
 import '../../../../models/enums/sensitivity.dart';
 import '../../../../services/analytics_service.dart';
+import '../../../../services/demo_history_service.dart';
 import '../../../../services/notification_service.dart';
 import '../../../../services/records_service.dart';
 import '../../../../services/settings_service.dart';
@@ -101,6 +102,20 @@ class SettingsPageBloc
       );
     } finally {
       emit(state.rebuild((b) => b.isDeleting = false));
+    }
+  }
+
+  /// QA builds only: two weeks of sample history for the demo video. The
+  /// message for a snackbar.
+  Future<String> fillSampleHistory() async {
+    try {
+      final added = await demoHistoryService.seed();
+      return added
+          ? 'Added two weeks of sample history. See Insights.'
+          : 'Finish calibration first.';
+    } on Object catch (e) {
+      _logger.warning('Filling sample history failed: $e');
+      return "Couldn't add the sample history.";
     }
   }
 
