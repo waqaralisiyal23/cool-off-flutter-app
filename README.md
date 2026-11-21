@@ -18,7 +18,7 @@ were built together:
 | **Cool Off** (this repo) | the app |
 | **[smartspectra_flutter](https://github.com/waqaralisiyal23/smartspectra_flutter)** | the Flutter plugin for the SmartSpectra SDK that Cool Off runs on, open source and published on [pub.dev](https://pub.dev/packages/smartspectra_flutter) (Android + iOS) |
 
-> Demo video: _link coming with the DEV post_
+> ▶️ **Demo video:** https://youtu.be/PWOFyOhhTDs
 
 > For wellness and informational use only. **Not a medical device.** Cool Off does not
 > diagnose, treat or monitor any condition.
