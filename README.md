@@ -10,9 +10,13 @@ choose: send it, hold it for a while, or take a one-minute cool-down and check a
 
 It never blocks you. **Send anyway** is on every result.
 
-Built for the DEV.to Presage SmartSpectra SDK Challenge on
-[`smartspectra_flutter`](https://pub.dev/packages/smartspectra_flutter), a Flutter
-plugin for the SmartSpectra SDK that I wrote and published alongside it.
+Built for the DEV.to Presage SmartSpectra SDK Challenge. The entry has two parts that
+were built together:
+
+| | |
+|---|---|
+| **Cool Off** (this repo) | the app |
+| **[smartspectra_flutter](https://github.com/waqaralisiyal23/smartspectra_flutter)** | the Flutter plugin for the SmartSpectra SDK that Cool Off runs on, open source and published on [pub.dev](https://pub.dev/packages/smartspectra_flutter) (Android + iOS) |
 
 > Demo video: _link coming with the DEV post_
 
@@ -24,7 +28,9 @@ plugin for the SmartSpectra SDK that I wrote and published alongside it.
 1. **Calibrate once.** A calm 30-second reading sets *your* usual pulse, so every check
    is compared with you, not with an average person.
 2. **Write.** Type or paste the message. A small meter warms up live as the text gets
-   harsher (CAPS, `!!!`, insults), all on the phone.
+   harsher (CAPS, `!!!`, insults, dismissive phrases like "get out of here",
+   "always/never"), all on the phone. Words alone can reach Warm; Heated also needs
+   your pulse or face.
 3. **Check (~20 s).** The camera measures pulse and expression while the screen asks
    you to reread your message. The first pulse value takes about 12 seconds.
 4. **Result.** Three signals are scored and combined:
@@ -150,6 +156,18 @@ derry check-strict   # format check + analyzer
 ```
 The heat engine, signal collection, auto-tuning, check-in schedule, database and
 screen logic are covered without a camera (the measurement source is swappable).
+
+### Demo tools (QA builds only)
+*Settings → Demo* has shortcuts for testing and for recording the demo video. They are
+hidden in production builds:
+- **Check-ins due right away:** the next-morning "Glad you sent it?" shows at once
+  (notification a minute later) instead of the next morning.
+- **Fill with sample history:** adds two weeks of past checks, cool-downs and check-in
+  answers (no message text) so Insights has something to show. *Delete all my data*
+  removes it.
+- A **1-minute** hold option.
+
+The demo video labels the places where these are used.
 
 ### Without a camera
 QA builds can replace the camera with a simulated reading, which is handy on an
